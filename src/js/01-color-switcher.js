@@ -21,6 +21,7 @@ function starthangeBodyColor() {
 function stopedChangeBodyColor() {
     clearInterval(timerId);
     refs.startBtn.removeAttribute('disabled', 'disabled');
+    refs.stopBtn.setAttribute('disabled', 'disabled');
 }
 
 function getRandomHexColor() {
