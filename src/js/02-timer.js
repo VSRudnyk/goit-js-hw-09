@@ -1,4 +1,4 @@
-import flatpickr from "flatpickr";
+import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
@@ -10,9 +10,9 @@ const refs = {
   hours: document.querySelector('span[data-hours]'),
   minutes: document.querySelector('span[data-minutes]'),
   seconds: document.querySelector('span[data-seconds]'),
-}
+};
 
-refs.startBtn.setAttribute('disabled', 'disabled');   
+refs.startBtn.setAttribute('disabled', 'disabled');
 refs.startBtn.addEventListener('click', onClickStartBnt);
 
 const options = {
@@ -32,19 +32,21 @@ const options = {
   },
 };
 
-flatpickr("#datetime-picker", options);
+flatpickr('#datetime-picker', options);
 
 function onClickStartBnt() {
-   setInterval(() => {
+  setInterval(() => {
     const deltaTime = selectedDatesOnUnix - Date.now();
+    if (deltaTime <= 0) {
+      return;
+    }
     const { days, hours, minutes, seconds } = convertMs(deltaTime);
-   
+
     refs.days.textContent = days;
     refs.hours.textContent = hours;
     refs.minutes.textContent = minutes;
     refs.seconds.textContent = seconds;
   }, 1000);
-  
 }
 
 function addLeadingZero(value) {
@@ -69,4 +71,3 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
-
